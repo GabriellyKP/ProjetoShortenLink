@@ -1,0 +1,66 @@
+@import 'variables';
+
+button {
+    height: 40px;
+    border: 0;
+    border-radius: 20px;
+    padding: 0 15px 0 15px;
+    font-weight: 500;
+    background-color: $cyan-color;
+    font: 700 18px 'Poppins', sans-serif;
+    color: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(120%);
+    }
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img{
+        max-width: 200px;
+    }
+   
+}
+
+
+a{  
+    align-items: center;
+    padding: 0 10px 0 10px;
+    text-decoration: none;
+    color: $grayish-violet;
+    font: 700 18px 'Poppins', sans-serif;
+
+    &:hover {
+        filter: brightness(20%);
+    }
+}
+
+.login {
+   display: flex;
+    align-items: center;
+    margin-left: auto;
+
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 200px 0 200px;
+
+}
+
+h1 {
+    font: 800 50px 'Poppins', sans-serif;
+    color: $very-dark-violet;
+}
