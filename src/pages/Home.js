@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/style.scss'
 import Logo from '../assets/images/logo.svg'
 import Illustration from '../assets/images/illustration-working.svg'
+import BgShorten from '../assets/images/bg-shorten-desktop.svg'
 
 export function Home() {
     return (
@@ -17,19 +18,26 @@ export function Home() {
             </div>
             </div>
 
-            <div className="content">
+            <main className="content">
                 <div>
-                <h1>
-                    More than just shorter links
-                </h1>
-                <p>
-                    Build your brand's recognation and get detailed insights on how
-                    your links are performing.
-                </p>
-                <button>Get Started</button>
+                    <h1>
+                        More than just shorter links
+                    </h1>
+                    <p>
+                        Build your brand's recognation and get detailed insights on how
+                        your links are performing.
+                    </p>
+                    <button>Get Started</button>
                 </div>
                 <div>
-                <img src={Illustration} alt="Ilustração de pessoa trabalhando no computador" />
+                    <img src={Illustration} alt="Ilustração de pessoa trabalhando no computador" />
+                </div>
+            </main>
+
+            <div className="bg-shorten">
+                <div>
+                    <input type="text" placeholder="Shorten a link here..."/>
+                    <button>Shorten It!</button>
                 </div>
             </div>
         </div>

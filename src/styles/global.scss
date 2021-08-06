@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+body{
+    margin: 30px 160px 0 160px;
+}
+
 body, input, textarea, p {
     font: 500 18px 'Poppins', sans-serif;
     color: $grayish-violet;

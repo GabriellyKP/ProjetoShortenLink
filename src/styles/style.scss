@@ -1,13 +1,13 @@
 @import 'variables';
 
 button {
-    height: 40px;
+    height: 35px;
+    width: auto;
     border: 0;
     border-radius: 20px;
-    padding: 0 15px 0 15px;
-    font-weight: 500;
+    padding: 0 20px 0 20px;
     background-color: $cyan-color;
-    font: 700 18px 'Poppins', sans-serif;
+    font: 700 15px 'Poppins', sans-serif;
     color: #fff;
 
     display: flex;
@@ -24,6 +24,7 @@ button {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 60px;
 
     img{
         max-width: 200px;
@@ -37,7 +38,7 @@ a{
     padding: 0 10px 0 10px;
     text-decoration: none;
     color: $grayish-violet;
-    font: 700 18px 'Poppins', sans-serif;
+    font: 700 15px 'Poppins', sans-serif;
 
     &:hover {
         filter: brightness(20%);
@@ -56,11 +57,51 @@ a{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 200px 0 200px;
+
+    div{
+        width: 50%;
+    }
+
+    img{
+        margin-left: 110px;
+        max-width: 700px;
+    }
+    h1 {
+        font: 800 60px 'Poppins', sans-serif;
+        color: $very-dark-violet;
+        line-height: 67px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin: 0 150px 30px 0;
+        line-height: 25px;
+    }
 
 }
 
-h1 {
-    font: 800 50px 'Poppins', sans-serif;
-    color: $very-dark-violet;
+.bg-shorten{
+    background-color: $dark-violet;
+    
+    div{
+    background-image: url("../assets/images/bg-shorten-desktop.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    flex-direction: row;
+    padding: 50px 50px 50px 50px;
+    justify-content: space-between;
+
+    input{
+        border: 0;
+        border-radius: 5px;
+        width: 50%;
+    }
+
+    button{
+        border-radius: 5px;
+    }
+}
 }
