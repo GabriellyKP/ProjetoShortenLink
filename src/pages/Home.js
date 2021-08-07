@@ -1,10 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/style.scss'
 import Logo from '../assets/images/logo.svg'
 import Illustration from '../assets/images/illustration-working.svg'
-import BgShorten from '../assets/images/bg-shorten-desktop.svg'
 
 export function Home() {
+
+const [Link, setLink] = useState("")
+const [ShortLink, setShortLink] = useState([])
+
+const GetShorterLink = () =>{
+
+    const url = `https://api.shrtco.de/v2/shorten?url=${Link}`
+
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data) {
+        JSON.stringify(data)
+        let teste = data.result.full_short_link3
+        ShortLink.push(teste)
+        setShortLink(ShortLink)
+        console.log(ShortLink)
+
+      })
+      .catch(err => {
+        console.log("Erro ao encurtar link " + err);
+      }); 
+}
+
+const handleChangeInputLink = (event) => {
+    let inputLink = event.target.value
+    setLink(inputLink)
+} 
+
     return (
         <div>
             <div className="menu">
@@ -36,9 +63,30 @@ export function Home() {
 
             <div className="bg-shorten">
                 <div>
-                    <input type="text" placeholder="Shorten a link here..."/>
-                    <button>Shorten It!</button>
+                    <input type="text" value={Link} onChange={handleChangeInputLink} 
+                    placeholder="  Shorten a link here..."/>
+                    <button onClick={GetShorterLink}>Shorten It!</button>
                 </div>
+            </div>
+
+            <div>
+            {ShortLink?.map(info => {
+                return (
+                    <li>{info}</li>
+                )
+                })
+              }
+            </div>
+            
+
+            <div className="content-site">
+                <h1>
+                    Advanced Statistics
+                </h1>
+                <p>
+                    Track how your links are performing across the web
+                    with our advanced statistics dashboard.
+                </p>
             </div>
         </div>
     )

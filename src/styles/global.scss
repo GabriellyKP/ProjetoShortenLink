@@ -7,12 +7,17 @@
 }
 
 body{
-    margin: 30px 160px 0 160px;
+    margin: 30px 180px 0 180px;
 }
 
 body, input, textarea, p {
     font: 500 18px 'Poppins', sans-serif;
     color: $grayish-violet;
+}
+
+h1 {
+    font: 800 'Poppins', sans-serif;
+    color: $very-dark-violet;
 }
 
 
