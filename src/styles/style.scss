@@ -79,20 +79,23 @@ a{
 
 }
 
-.bg-shorten{
+.input-link{
     background-color: $dark-violet;
-     margin-top: 40px;
-    
-    div{
+    margin-top: 40px;
+
     background-image: url("../assets/images/bg-shorten-desktop.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    padding: 40px 40px 40px 40px;
 
-    display: flex;
-    flex-direction: row;
-    padding: 50px 50px 50px 50px;
-    justify-content: space-around;
+    div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin: 15px 0 10px 0;
+    }
 
     input{
         border: 0;
@@ -107,7 +110,11 @@ a{
         border-radius: 5px;
         height: 45px;
     }
-}
+
+    span {
+        color: $red-color;
+        margin-left: 15px;
+    }
 }
 
 .content-site{

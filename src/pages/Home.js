@@ -7,9 +7,11 @@ export function Home() {
 
 const [Link, setLink] = useState("")
 const [ShortLink, setShortLink] = useState([])
+const [Shortening, setShortening] = useState(false)
+const [Validate, setValidate] = useState(false)
 
 const GetShorterLink = () =>{
-
+    setShortening(true)
     const url = `https://api.shrtco.de/v2/shorten?url=${Link}`
 
     fetch(url)
@@ -20,6 +22,7 @@ const GetShorterLink = () =>{
         ShortLink.push(teste)
         setShortLink(ShortLink)
         console.log(ShortLink)
+        setShortening(false)
 
       })
       .catch(err => {
@@ -31,6 +34,15 @@ const handleChangeInputLink = (event) => {
     let inputLink = event.target.value
     setLink(inputLink)
 } 
+
+const handleValidation =() => {
+    if(Link.length > 0){
+        setValidate(false)
+        GetShorterLink()
+    }else{
+        setValidate(true)
+    }
+}
 
     return (
         <div>
@@ -61,12 +73,17 @@ const handleChangeInputLink = (event) => {
                 </div>
             </main>
 
-            <div className="bg-shorten">
+            <div className="input-link">
                 <div>
-                    <input type="text" value={Link} onChange={handleChangeInputLink} 
-                    placeholder="  Shorten a link here..."/>
-                    <button onClick={GetShorterLink}>Shorten It!</button>
+                <input type="text" value={Link} onChange={handleChangeInputLink} 
+                    placeholder="  Shorten a link here..." style={Validate?{border: "2px solid hsl(0, 87%, 67%)"}:null}/>
+                    
+                <button onClick={handleValidation} disabled={Shortening}>{Shortening? "Wait..." :"Shorten It!"}
+                </button>
                 </div>
+
+                <span>{Validate? "Please add a link" : null}</span>
+               
             </div>
 
             <div>
