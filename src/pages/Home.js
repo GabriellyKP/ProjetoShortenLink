@@ -2,15 +2,32 @@ import React, { useState } from 'react'
 import '../styles/style.scss'
 import Logo from '../assets/images/logo.svg'
 import Illustration from '../assets/images/illustration-working.svg'
+import Facebook from '../assets/images/icon-facebook.svg'
+import Instagram from '../assets/images/icon-instagram.svg'
+import Pinterest from '../assets/images/icon-pinterest.svg'
+import Twitter from '../assets/images/icon-twitter.svg'
+import Customizable from '../assets/images/icon-fully-customizable.svg'
+import Brand from '../assets/images/icon-brand-recognition.svg'
+import Records from '../assets/images/icon-detailed-records.svg'
 
 export function Home() {
 
+let links = {
+original: "",
+shortened: "",
+    }
+
 const [Link, setLink] = useState("")
 const [ShortLink, setShortLink] = useState([])
+const [ResultLinks, setResultLinks] = useState(links)
 const [Shortening, setShortening] = useState(false)
 const [Validate, setValidate] = useState(false)
 
+
 const GetShorterLink = () =>{
+
+   
+
     setShortening(true)
     const url = `https://api.shrtco.de/v2/shorten?url=${Link}`
 
@@ -18,10 +35,18 @@ const GetShorterLink = () =>{
     .then((resp) => resp.json())
     .then(function(data) {
         JSON.stringify(data)
-        let teste = data.result.full_short_link3
-        ShortLink.push(teste)
+        let shortenedLink = data.result.full_short_link3
+        setResultLinks({...ResultLinks, shortened: shortenedLink});
+        let original = data.result.original_link
+        setResultLinks({...ResultLinks, original: original});
+
+        var newLinks = {
+            original: ResultLinks.original,
+            shortened: ResultLinks.shortened,
+                }
+                
+        ShortLink.push(newLinks)
         setShortLink(ShortLink)
-        console.log(ShortLink)
         setShortening(false)
 
       })
@@ -46,8 +71,10 @@ const handleValidation =() => {
 
     return (
         <div>
+            <div className="main">
+
             <div className="menu">
-                <img src={Logo} alt="Imagem da logo Shortly" />
+                <img src={Logo} alt="Image logo Shortly" />
                 <a href="#" >Features</a>
                 <a href="#">Pricing</a>
                 <a href="#">Resources</a>
@@ -73,12 +100,16 @@ const handleValidation =() => {
                 </div>
             </main>
 
+            </div>
+
+            <div className="page-background">
             <div className="input-link">
                 <div>
                 <input type="text" value={Link} onChange={handleChangeInputLink} 
                     placeholder="  Shorten a link here..." style={Validate?{border: "2px solid hsl(0, 87%, 67%)"}:null}/>
                     
-                <button onClick={handleValidation} disabled={Shortening}>{Shortening? "Wait..." :"Shorten It!"}
+                <button onClick={handleValidation} disabled={Shortening} className="button-square">
+                    {Shortening? "Wait..." :"Shorten It!"}
                 </button>
                 </div>
 
@@ -89,7 +120,11 @@ const handleValidation =() => {
             <div>
             {ShortLink?.map(info => {
                 return (
-                    <li>{info}</li>
+                    <li className="list" key={info.original}>
+                        {info.original}
+                        {info.shortened} 
+                        <button className="button-square">Copy</button>
+                    </li>
                 )
                 })
               }
@@ -104,7 +139,90 @@ const handleValidation =() => {
                     Track how your links are performing across the web
                     with our advanced statistics dashboard.
                 </p>
+
+                <div className="cards">
+                <div>
+                <img src={Brand} alt="Image Brand Recognation" />
+                <h1>
+                    Brand Recognation
+                </h1>
+                <p>
+                    Boost your brand recognation with each click. Generic links
+                    don't mean a thing. Branded links help instil confidence in your
+                    content.
+                </p>
+              </div>
+
+              <div>
+              <img src={Records} alt="Image Detailed Records" />
+                <h1>
+                    Detailed Records
+                </h1>
+                <p>
+                    Gain insights into who is clicking your links. Knowing when and where
+                    people engage with your content helps inform better decisions.
+                </p>
+              </div>
+
+              <div>
+              <img src={Customizable} alt="Image Fully customizable"/>
+                <h1>
+                    Fully customizable
+                </h1>
+                <p>
+                    Improve brand awareness and content discoverability through customizable
+                    links, supercharging audience engagement.
+                </p>
+              </div>
+              </div>
+
             </div>
+            </div>
+            
+            <div className="background-boost">
+                <h1>Boost your links today</h1>
+
+                <div>
+                <button>Get Started</button>
+                </div>
+
+            </div>
+
+            <div className="footer">
+                <img src={Logo} alt="Image logo Shortly" style={{height: "50%"}} />
+
+            <dl>
+                <dt className="font-main-link"><a href="#" >Features</a></dt>
+                <dd><a href="#" >Link Shortening</a></dd>
+                <dd><a href="#" >Branded Links</a></dd>
+                <dd><a href="#" >Analytics</a></dd>
+            </dl>
+
+            <dl>
+                <dt className="font-main-link"><a href="#" >Resources</a></dt>
+                <dd><a href="#" >Blog</a></dd>
+                <dd><a href="#" >Developers</a></dd>
+                <dd><a href="#" >Support</a></dd>
+            </dl>
+
+            <dl>
+                <dt className="font-main-link"><a href="#" >Company</a></dt>
+                <dd><a href="#" >About</a></dd>
+                <dd><a href="#" >Our Team</a></dd>
+                <dd><a href="#" >Careers</a></dd>
+                <dd><a href="#" >Contact</a></dd>
+            </dl>
+
+             <div>
+                <a href="#" >{<img src={Facebook} alt="Facebook" />}</a>
+                <a href="#" >{<img src={Twitter} alt="Twitter" />}</a>
+                <a href="#" >{<img src={Pinterest} alt="Pinterest" />}</a>
+                <a href="#" >{<img src={Instagram} alt="Instagram" />}</a>
+             </div>
+
+            </div>
+        
+
         </div>
     )
 }
