@@ -139,8 +139,10 @@ const handleValidation =() => {
                     Track how your links are performing across the web
                     with our advanced statistics dashboard.
                 </p>
+            </div>
 
                 <div className="cards">
+                    
                 <div>
                 <img src={Brand} alt="Image Brand Recognation" />
                 <h1>
@@ -176,7 +178,7 @@ const handleValidation =() => {
               </div>
               </div>
 
-            </div>
+            
             </div>
             
             <div className="background-boost">

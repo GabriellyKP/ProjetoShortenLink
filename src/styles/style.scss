@@ -148,19 +148,24 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 140px;
 
+    p{
+    width: 35%;
+    text-align: center;
+    }
 }
 
 .cards{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 40px 180px 20px 180px;
+    margin: 40px 135px 20px 135px;
     
     div{
         margin: 5% 0 10% 0;
         background-color: #fff;
-        padding: 25px 25px 30px 25px;
+        padding: 25px 40px 30px 40px;
         width: 25%;
         border-radius: 10px;
     }
@@ -203,6 +208,12 @@ a{
     h1{
         color: #fff;
         margin-bottom: 20px;
+    }
+
+    button{
+        width: 150px;
+        height: 45px;
+        border-radius: 30px;
     }
 }
 
