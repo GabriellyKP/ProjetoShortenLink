@@ -68,6 +68,7 @@ a{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     div{
         width: 50%;
@@ -76,6 +77,7 @@ a{
     img{
         margin-left: 110px;
         max-width: 700px;
+        flex-wrap: wrap;
     }
     h1 {
         font-size: 70px;
@@ -133,16 +135,24 @@ a{
 
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding-left: 1%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 15px 0 15px;
     margin: 0 180px 10px 180px;
 
+    a{
+        color: $very-dark-violet;
+        &:hover {
+            filter: brightness(130%);
+        }
+    }
+   
+
     button{
-        height: 75%;
+        height: 35px;
 
     }
 }
-
 
 .content-site{
     display: flex;
@@ -151,6 +161,7 @@ a{
     margin-top: 140px;
 
     p{
+    margin-top: 20px;
     width: 35%;
     text-align: center;
     }
@@ -220,10 +231,22 @@ a{
 .footer {
     background-color: $very-dark-violet;
 
+    div{
+    margin: 0px 180px 0px 180px;
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 2% 0 5% 0;
+    padding: 35px 0 70px 0;
+    }
+
+    img{
+        margin-right: 20%;
+    }
+
+    dl{
+        margin-right: 40px;
+    }
 
     a{
         font: 500 15px 'Poppins', sans-serif;

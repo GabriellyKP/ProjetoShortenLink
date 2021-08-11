@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/style.scss'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+
 import Logo from '../assets/images/logo.svg'
 import Illustration from '../assets/images/illustration-working.svg'
 import Facebook from '../assets/images/icon-facebook.svg'
@@ -12,16 +14,11 @@ import Records from '../assets/images/icon-detailed-records.svg'
 
 export function Home() {
 
-let links = {
-original: "",
-shortened: "",
-    }
-
 const [Link, setLink] = useState("")
 const [ShortLink, setShortLink] = useState([])
-const [ResultLinks, setResultLinks] = useState(links)
 const [Shortening, setShortening] = useState(false)
 const [Validate, setValidate] = useState(false)
+const [CopyButton, setCopyButton] = useState(false)
 
 
 const GetShorterLink = () =>{
@@ -35,19 +32,24 @@ const GetShorterLink = () =>{
     .then((resp) => resp.json())
     .then(function(data) {
         JSON.stringify(data)
+        console.log(data)
         let shortenedLink = data.result.full_short_link3
-        setResultLinks({...ResultLinks, shortened: shortenedLink});
-        let original = data.result.original_link
-        setResultLinks({...ResultLinks, original: original});
 
-        var newLinks = {
-            original: ResultLinks.original,
-            shortened: ResultLinks.shortened,
+        let originals = data.result.original_link
+  
+
+        let newLinks = {
+            original: originals,
+            shortened: shortenedLink,
                 }
-                
+
+           
         ShortLink.push(newLinks)
         setShortLink(ShortLink)
+        console.log("sucesso", ShortLink)
         setShortening(false)
+
+        
 
       })
       .catch(err => {
@@ -67,6 +69,10 @@ const handleValidation =() => {
     }else{
         setValidate(true)
     }
+}
+
+const CopyLink = (e) => {
+    setCopyButton(true)
 }
 
     return (
@@ -118,16 +124,22 @@ const handleValidation =() => {
             </div>
 
             <div>
-            {ShortLink?.map(info => {
+                {ShortLink?.map(info => {
                 return (
-                    <li className="list" key={info.original}>
-                        {info.original}
-                        {info.shortened} 
-                        <button className="button-square">Copy</button>
-                    </li>
-                )
-                })
-              }
+                    <div className="list" key={info.shortened}>
+                        <a href={info.original}>{info.original}</a>
+                            <a href={info.shortened} style={{color: "hsl(180, 66%, 49%)"}}>
+                                {info.shortened}
+                            </a>
+                            <CopyToClipboard text={info.shortened}>
+                            <button className="button-square" onClick={CopyLink} style={CopyButton?{backgroundColor:"hsl(257, 27%, 26%)"}:null}>
+                                {CopyButton? "Copied!" :"Copy"}
+                            </button>
+                            </CopyToClipboard>
+                    </div>
+                    )
+                    })
+                }
             </div>
             
 
@@ -141,10 +153,9 @@ const handleValidation =() => {
                 </p>
             </div>
 
-                <div className="cards">
-                    
-                <div>
-                <img src={Brand} alt="Image Brand Recognation" />
+            <div className="cards">     
+            <div>
+                    <img src={Brand} alt="Image Brand Recognation" />
                 <h1>
                     Brand Recognation
                 </h1>
@@ -153,10 +164,10 @@ const handleValidation =() => {
                     don't mean a thing. Branded links help instil confidence in your
                     content.
                 </p>
-              </div>
+            </div>
 
-              <div>
-              <img src={Records} alt="Image Detailed Records" />
+            <div>
+                <img src={Records} alt="Image Detailed Records" />
                 <h1>
                     Detailed Records
                 </h1>
@@ -164,10 +175,10 @@ const handleValidation =() => {
                     Gain insights into who is clicking your links. Knowing when and where
                     people engage with your content helps inform better decisions.
                 </p>
-              </div>
+            </div>
 
-              <div>
-              <img src={Customizable} alt="Image Fully customizable"/>
+            <div>
+                <img src={Customizable} alt="Image Fully customizable"/>
                 <h1>
                     Fully customizable
                 </h1>
@@ -175,55 +186,56 @@ const handleValidation =() => {
                     Improve brand awareness and content discoverability through customizable
                     links, supercharging audience engagement.
                 </p>
-              </div>
-              </div>
-
-            
             </div>
+            </div>
+
             
             <div className="background-boost">
                 <h1>Boost your links today</h1>
 
                 <div>
-                <button>Get Started</button>
+                    <button>Get Started</button>
                 </div>
 
             </div>
+            </div>
 
             <div className="footer">
-                <img src={Logo} alt="Image logo Shortly" style={{height: "50%"}} />
+                <div>
 
-            <dl>
-                <dt className="font-main-link"><a href="#" >Features</a></dt>
-                <dd><a href="#" >Link Shortening</a></dd>
-                <dd><a href="#" >Branded Links</a></dd>
-                <dd><a href="#" >Analytics</a></dd>
-            </dl>
+                    <img src={Logo} alt="Image logo Shortly" style={{height: "50%"}} />
 
-            <dl>
-                <dt className="font-main-link"><a href="#" >Resources</a></dt>
-                <dd><a href="#" >Blog</a></dd>
-                <dd><a href="#" >Developers</a></dd>
-                <dd><a href="#" >Support</a></dd>
-            </dl>
+                <dl>
+                    <dt className="font-main-link"><a href="#" >Features</a></dt>
+                    <dd><a href="#" >Link Shortening</a></dd>
+                    <dd><a href="#" >Branded Links</a></dd>
+                    <dd><a href="#" >Analytics</a></dd>
+                </dl>
 
-            <dl>
-                <dt className="font-main-link"><a href="#" >Company</a></dt>
-                <dd><a href="#" >About</a></dd>
-                <dd><a href="#" >Our Team</a></dd>
-                <dd><a href="#" >Careers</a></dd>
-                <dd><a href="#" >Contact</a></dd>
-            </dl>
+                <dl>
+                    <dt className="font-main-link"><a href="#" >Resources</a></dt>
+                    <dd><a href="#" >Blog</a></dd>
+                    <dd><a href="#" >Developers</a></dd>
+                    <dd><a href="#" >Support</a></dd>
+                </dl>
 
-             <div>
-                <a href="#" >{<img src={Facebook} alt="Facebook" />}</a>
-                <a href="#" >{<img src={Twitter} alt="Twitter" />}</a>
-                <a href="#" >{<img src={Pinterest} alt="Pinterest" />}</a>
-                <a href="#" >{<img src={Instagram} alt="Instagram" />}</a>
-             </div>
+                <dl>
+                    <dt className="font-main-link"><a href="#" >Company</a></dt>
+                    <dd><a href="#" >About</a></dd>
+                    <dd><a href="#" >Our Team</a></dd>
+                    <dd><a href="#" >Careers</a></dd>
+                    <dd><a href="#" >Contact</a></dd>
+                </dl>
 
+                
+                    <a href="#" >{<img src={Facebook} alt="Facebook" />}</a>
+                    <a href="#" >{<img src={Twitter} alt="Twitter" />}</a>
+                    <a href="#" >{<img src={Pinterest} alt="Pinterest" />}</a>
+                    <a href="#" >{<img src={Instagram} alt="Instagram" />}</a>
+               
+
+                </div>
             </div>
-        
 
         </div>
     )
