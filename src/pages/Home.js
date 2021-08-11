@@ -18,14 +18,10 @@ const [Link, setLink] = useState("")
 const [ShortLink, setShortLink] = useState([])
 const [Shortening, setShortening] = useState(false)
 const [Validate, setValidate] = useState(false)
-const [CopyButton, setCopyButton] = useState(false)
 
-
-const GetShorterLink = () =>{
-
-   
-
+const GetShorterLink = () =>{ 
     setShortening(true)
+   
     const url = `https://api.shrtco.de/v2/shorten?url=${Link}`
 
     fetch(url)
@@ -36,18 +32,14 @@ const GetShorterLink = () =>{
 
         let originals = data.result.original_link
   
-
         let newLinks = {
             original: originals,
             shortened: shortenedLink,
                 }
-
-           
+     
         ShortLink.push(newLinks)
         setShortLink(ShortLink)
         setShortening(false)
-
-        
 
       })
       .catch(err => {
@@ -70,7 +62,8 @@ const handleValidation =() => {
 }
 
 const CopyLink = (e) => {
-    setCopyButton(true)
+    e.target.firstChild.data = "Copied!";
+    e.target.style.background = "hsl(257, 27%, 26%)";
 }
 
     return (
@@ -130,9 +123,7 @@ const CopyLink = (e) => {
                                 {info.shortened}
                             </a>
                             <CopyToClipboard text={info.shortened}>
-                            <button className="button-square" onClick={CopyLink} style={CopyButton?{backgroundColor:"hsl(257, 27%, 26%)"}:null}>
-                                {CopyButton? "Copied!" :"Copy"}
-                            </button>
+                            <button className="button-square" onClick={CopyLink}>Copy</button>
                             </CopyToClipboard>
                     </div>
                     )
