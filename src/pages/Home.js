@@ -32,7 +32,6 @@ const GetShorterLink = () =>{
     .then((resp) => resp.json())
     .then(function(data) {
         JSON.stringify(data)
-        console.log(data)
         let shortenedLink = data.result.full_short_link3
 
         let originals = data.result.original_link
@@ -46,7 +45,6 @@ const GetShorterLink = () =>{
            
         ShortLink.push(newLinks)
         setShortLink(ShortLink)
-        console.log("sucesso", ShortLink)
         setShortening(false)
 
         
